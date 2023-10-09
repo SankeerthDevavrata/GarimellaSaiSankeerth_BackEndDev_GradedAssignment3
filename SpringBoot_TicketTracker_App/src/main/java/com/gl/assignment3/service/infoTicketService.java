@@ -15,4 +15,5 @@ public interface infoTicketService {
 	infoTicket updateTicket(int id, infoTicket ticket);
 
 	void deleteTicketByID(int id);
+	
 }

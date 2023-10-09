@@ -46,5 +46,9 @@ public class infoTicketServiceImp implements infoTicketService {
 	public infoTicket getTicketByTitle(String title) {
 		return ticketRepository.findByTicketTitle(title);
 	}
+	
+	 public List<infoTicket> searchByTitleOrDescription(String searchTerm) {
+	        return ticketRepository.findByTicketTitleContainingOrTicketShortDescriptionContaining(searchTerm, searchTerm);
+	    }
 
 }

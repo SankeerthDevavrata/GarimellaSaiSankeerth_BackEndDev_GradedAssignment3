@@ -1,8 +1,10 @@
 package com.gl.assignment3.controller;
 
-import java.util.Collections;
+//import java.util.Collections;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -65,16 +67,25 @@ public class ticketController {
 		return "redirect:/tickets";
 	}
 	
+//	@PostMapping("/tickets/search")
+//    private String searchTickets(@RequestParam String ticketSearch, Model model) {
+//        infoTicket ticket = ticketService.getTicketByTitle(ticketSearch);
+//        if (ticket != null) {
+//            model.addAttribute("tickets", Collections.singletonList(ticket));
+//        } else {
+//            model.addAttribute("tickets", Collections.emptyList());
+//        }
+//        return "search-tickets";
+//    }
+	
 	@PostMapping("/tickets/search")
-    private String searchTickets(@RequestParam String ticketSearch, Model model) {
-        infoTicket ticket = ticketService.getTicketByTitle(ticketSearch);
-        if (ticket != null) {
-            model.addAttribute("tickets", Collections.singletonList(ticket));
-        } else {
-            model.addAttribute("tickets", Collections.emptyList());
-        }
-        return "search-tickets";
-    }
+	private String searchTicketsByBoth(@RequestParam String ticketSearch, Model model) {
+	    List<infoTicket> tickets = ticketService.searchByTitleOrDescription(ticketSearch);
+	    
+	    model.addAttribute("tickets", tickets);
+	    return "search-tickets";
+	}
+
 	
 	@GetMapping("/tickets/view/{id}")
 	private String viewTickets(@PathVariable int id , Model model) {
